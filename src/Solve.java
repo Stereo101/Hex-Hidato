@@ -47,7 +47,7 @@ public class Solve {
 				}
 			}
 		}
-		System.out.println("SHITS FINE");
+		System.out.println("ITS FINE");
 		return true;
 	}
 	
@@ -93,7 +93,7 @@ public class Solve {
 		
 		
 		if(!Solve.checkValid(board)) {
-			System.out.println("SHITS BROKE");
+			System.out.println("BROKE");
 			return board;
 		}
 		
@@ -149,7 +149,7 @@ public class Solve {
 		}
 		
 		if(min==99||min==0||min==-1) {
-			System.out.println("FUCK");
+			System.out.println("Darn it :)");
 			return board;
 		}
 		
