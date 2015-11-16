@@ -1,8 +1,11 @@
 import java.util.Scanner;
 
 public class Solve {
+	static boolean doPrint = false;
 	
 	public static boolean checkValid(Board board) {
+		
+		
 		for(int i = 1; i<=board.hexes; i++) {
 			if(board.cnstrArray[i][0]==0) {
 				
@@ -47,7 +50,7 @@ public class Solve {
 				}
 			}
 		}
-		System.out.println("ITS FINE");
+		if(doPrint){System.out.println("ITS FINE");}
 		return true;
 	}
 	
@@ -93,7 +96,7 @@ public class Solve {
 		
 		
 		if(!Solve.checkValid(board)) {
-			System.out.println("BROKE");
+			if(doPrint){System.out.println("BROKE");}
 			return board;
 		}
 		
@@ -102,7 +105,7 @@ public class Solve {
 		
 		Solve.checkSolved(board,1,-1);
 		if(board.state==1) {
-			System.out.println("ITS DONE");
+			if(doPrint){System.out.println("ITS DONE");}
 			return board;
 		}
 		
@@ -149,7 +152,7 @@ public class Solve {
 		}
 		
 		if(min==99||min==0||min==-1) {
-			System.out.println("Darn it :)");
+			if(doPrint){System.out.println("Darn it :)");}
 			return board;
 		}
 		
@@ -157,13 +160,13 @@ public class Solve {
 		Move[] options = new Move[min];
 		int movekey = 0;
 		
-		System.out.print("\nFINDIND " + min + " OPTIONS: ");
+		if(doPrint){System.out.print("\nFINDIND " + min + " OPTIONS: ");}
 		
 		if(typefind == 0) {
-			System.out.print("TYPE 0 ");
+			if(doPrint){System.out.print("TYPE 0 ");}
 			for(int i = 1; i<=board.hexes; i++) {
 				if(board.cnstrArray[type][i]==0) {
-					System.out.print("(" + (type-1) + "," + i + ") ");
+					if(doPrint){System.out.print("(" + (type-1) + "," + i + ") ");}
 					options[movekey] = new Move(board.intToHexArray[type-1],i);
 					movekey++;
 				}
@@ -171,10 +174,10 @@ public class Solve {
 			
 			
 		} else if(typefind == 1) {
-			System.out.print("TYPE 1 ");
+			if(doPrint){System.out.print("TYPE 1 ");}
 			for(int i = 1; i<=board.hexes; i++) {
 				if(board.cnstrArray[i][type]==0) {
-					System.out.print("(" + i+ "," + type + ") ");
+					if(doPrint){System.out.print("(" + i+ "," + type + ") ");}
 					options[movekey] = new Move(board.intToHexArray[i-1],type);
 					movekey++;
 				}
@@ -188,7 +191,7 @@ public class Solve {
 			board.SingletonPropAdd(options[0]);
 			Solve.checkSolved(board, 1, -1);
 			if(board.state == 1) {
-				System.out.println("FOUND SOLVED BOARD");
+				if(doPrint){System.out.println("FOUND SOLVED BOARD");}
 				return board;
 			}
 			return DFS_Propagate_Singletons(board);
@@ -199,11 +202,11 @@ public class Solve {
 			//holdmoves = board.movesMade;
 			Board nBoard = board.deepCopy();
 			nBoard.SingletonPropAdd(options[i]);
-			nBoard.print();
+			if(doPrint){nBoard.print();}
 			nBoard = DFS_Propagate_Singletons(nBoard);
 			Solve.checkSolved(nBoard, 1, -1);
 			if(nBoard.state == 1) {
-				System.out.println("FOUND SOLVED BOARD");
+				if(doPrint){System.out.println("FOUND SOLVED BOARD");}
 				return nBoard;
 			}
 		}
@@ -217,7 +220,7 @@ public class Solve {
 			return board;
 		}
 		if(board.movesMade >= board.hexes) {
-			System.out.println("Too many moves");
+			if(doPrint){System.out.println("Too many moves");}
 			return board;
 		}
 		
